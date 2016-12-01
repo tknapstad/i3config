@@ -177,9 +177,8 @@ exec spotify
 #exec python /path/to/powerline/bindings/bar/powerline-bar.py --i3 | bar
 exec_always compton -f -I 0.5 -O 0.5 -D 1
 
-# Cycle shells
-bindsym $mod+c [title="Mate Terminal"] focus
-bindsym $mod+q [class="^google-chrome$"] focus
+# Launch calendar
+bindsym $mod+c exec mate-terminal -e /usr/bin/ikhal
 
 # Multimedia keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pulseaudio-ctl up 3"
@@ -192,7 +191,7 @@ bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
-# Floating dialogs for Logic
+# Floating dialogs for various software
 for_window [class="Logic"] floating enable
 
 # Lock, logout, reboot, ...
