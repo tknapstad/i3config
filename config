@@ -34,6 +34,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
+#bindsym $mod+Return exec dbus-launch mate-terminal
 bindsym $mod+Return exec mate-terminal
 
 # kill focused window
@@ -101,6 +102,9 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace $ws0
+
+bindsym $mod+Mod1+Down workspace prev_on_output
+bindsym $mod+Mod1+Up   workspace next_on_output
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
