@@ -103,8 +103,8 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace $ws0
 
-bindsym $mod+Mod1+Down workspace prev_on_output
-bindsym $mod+Mod1+Up   workspace next_on_output
+bindsym $mod+Mod1+Left  workspace prev_on_output
+bindsym $mod+Mod1+Right workspace next_on_output
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
