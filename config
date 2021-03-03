@@ -10,7 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $left_display DP-0
+set $left_display DVI-I-1
 set $right_display HDMI-0
 #set $left_display DP-1
 #set $right_display DVI-D-1
@@ -30,10 +30,20 @@ font pango:DejaVu Sans Mono 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# Display resolution
+exec --no-startup-id xrandr --output default --mode 1920x1200 --pos 0x0 --rotate normal
+
+# NetworkManager applet
+exec --no-startup-id nm-applet
+
+# Bluetooth applet
+exec --no-startup-id blueman-applet
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
+#bindsym $mod+Return exec dbus-launch mate-terminal
 bindsym $mod+Return exec alacritty
 
 # kill focused window
@@ -46,11 +56,7 @@ bindsym $mod+Shift+q kill
 # installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # Rofi
-#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 520 -opacity "65" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$bg-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "DejaVu Sans Mono 18"
-
-# j4-dmenu-desktop
-#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="(stest -flx $(echo $PATH | tr : ' ') | sort -u) | dmenu -i -fn 'DejaVu Sans-8' -l 30"
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'DejaVu Sans-8' -l 30"
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 520 -opacity "65" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$bg-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "DejaVu Sans Mono 18"
 
 # change focus
 bindsym $mod+Left focus left
@@ -177,21 +183,16 @@ for_window [class="google-chrome"] move to workspace $ws2
 for_window [class="Spotify"] move to workspace $ws0
 
 # Automatic startup
-#exec --no-startup-id conky -c ~/.conkyrc
-#exec --no-startup-id i3-msg 'workspace $ws1; exec mate-terminal -e zsh'
 exec --no-startup-id i3-msg 'workspace $ws1; exec alacritty'
 exec google-chrome
 exec spotify
-#exec python /path/to/powerline/bindings/bar/powerline-bar.py --i3 | bar
 exec_always --no-startup-id compton -f -I 0.5 -O 0.5 -D 1
 exec_always --no-startup-id imwheel -kill
 exec_always --no-startup-id solaar --window=hide
-
-# Start twmn notification daemon
-exec --no-startup-id twmnd
+exec_always --no-startup-id ~/.fehbg
 
 # Launch calendar
-bindsym $mod+c exec alacritty -e /usr/bin/ikhal
+bindsym $mod+c exec mate-terminal -e /usr/bin/ikhal
 
 # Multimedia keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pulseaudio-ctl up 3"
@@ -206,7 +207,6 @@ bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 
 # Floating dialogs for various software
 for_window [class="Logic"] floating enable
-for_window [class="Braillogui" instance="braillogui"] floating enable
 
 # Lock, logout, reboot, ...
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -223,6 +223,3 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+Pause mode "$mode_system"
-
-# Background image
-exec --no-startup-id ~/.fehbg
